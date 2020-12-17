@@ -132,50 +132,33 @@ public class formularioCliente extends javax.swing.JFrame {
 
     private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
 //1ro valido que los datos ingresados sean coherentes
-        //boolean bandera = false;
         Validacion v1 = new Validacion();
-        /*while(bandera == false){
-            if(v1.validarVacio(inputNombre.getText()) || v1.validarVacio(inputApellido.getText()) || !(v1.validarNumeroEntero(inputNumCliente.getText()))){
-            v1.mostrarAdvertencia();
-            }else if(v1.validarNumeroEntero(inputNumCliente.getText())){
-                int num = Integer.parseInt(inputNumCliente.getText());
-                if(v1.validarNumClientePositivo(num)){
-                    v1.mostrarAdvertencia();
-                }
-            }
-            else{
-                bandera = true;
-            }
-        }*/
-        
         if(v1.validarVacio(inputNombre.getText()) || v1.validarVacio(inputApellido.getText()) || !(v1.validarNumeroEntero(inputNumCliente.getText()))){
             v1.mostrarAdvertencia();
         }else if(v1.validarNumeroEntero(inputNumCliente.getText())){
             int num = Integer.parseInt(inputNumCliente.getText());
             if(v1.validarNumClientePositivo(num)){
+                String lvlAtencion = (String) jComboBoxAtencion.getSelectedItem();
+                String lvlResolucion = (String) jComboBoxResolucion.getSelectedItem();
+                String lvlRecomendacion = (String) jComboBoxRecomendacion.getSelectedItem();
+
+                Encuesta enc1 = new Encuesta(lvlAtencion, lvlResolucion, lvlRecomendacion, inputNombre.getText(), inputApellido.getText(), inputNumCliente.getText());
+                int numAtencion = Integer.parseInt(enc1.getNivelAtencion());
+                int numResolucion = Integer.parseInt(enc1.getNivelResolucion());
+                int numRecomendacion = Integer.parseInt(enc1.getNivelRecomendacion());
+
+                float prom = (float) (numAtencion + numResolucion + numRecomendacion)/3;
+                String promCadena = String.format("%.2f", prom);
+
+                VentanaResultado ventanaConfirm = new VentanaResultado();
+                ventanaConfirm.cargarPromedio(promCadena);
+
+                ventanaConfirm.setVisible(true);
+                this.dispose(); 
+            }else{
                 v1.mostrarAdvertencia();
             }
-        }else{
-            String lvlAtencion = (String) jComboBoxAtencion.getSelectedItem();
-            String lvlResolucion = (String) jComboBoxResolucion.getSelectedItem();
-            String lvlRecomendacion = (String) jComboBoxRecomendacion.getSelectedItem();
-
-            Encuesta enc1 = new Encuesta(lvlAtencion, lvlResolucion, lvlRecomendacion, inputNombre.getText(), inputApellido.getText(), inputNumCliente.getText());
-            int numAtencion = Integer.parseInt(enc1.getNivelAtencion());
-            int numResolucion = Integer.parseInt(enc1.getNivelResolucion());
-            int numRecomendacion = Integer.parseInt(enc1.getNivelRecomendacion());
-
-            float prom = (float) ((numAtencion + numResolucion + numRecomendacion)/3);
-            String promCadena = Float.toString(prom);
-
-            VentanaResultado ventanaConfirm = new VentanaResultado();
-            ventanaConfirm.cargarPromedio(promCadena);
-            
-            ventanaConfirm.setVisible(true);
-            this.dispose(); 
         }
-            
-        
     }//GEN-LAST:event_jButtonEnviarActionPerformed
 
     /**

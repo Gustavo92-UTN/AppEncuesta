@@ -6,7 +6,7 @@ public class VentanaResultado extends javax.swing.JFrame {
     }
     
     public void cargarPromedio(String promedio){
-        labelResultado.setText(promedio);
+        labelResultado.setText(promedio + " Puntos");
     }
 
     /**
@@ -44,8 +44,8 @@ public class VentanaResultado extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(labelPremisa))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(labelResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(35, 35, 35)
+                        .addComponent(labelResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
